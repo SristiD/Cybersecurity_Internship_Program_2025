@@ -1,2 +1,1 @@
-Week-1_MITRE-TTP-Mapping/MISP-Export/.gitkeep
-Week-1_MITRE-TTP-Mapping/Screenshots/.gitkeep
+
