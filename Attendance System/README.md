@@ -1,4 +1,3 @@
-
 # Attendance System - Instructions
 
 ## Intern: Sristi Dutta
