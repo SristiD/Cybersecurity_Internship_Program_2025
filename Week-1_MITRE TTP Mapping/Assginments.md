@@ -1,6 +1,6 @@
-# Assignments - Month 1
+# Assignments - Week 1
 
-All assignments for Month 1 will be stored here. Each assignment should be submitted in its own subfolder.
+All assignments for Week 1 will be stored here. Each assignment should be submitted in its own subfolder.
 
 ## Assignments
 - Assignment 1: Learn about Github, and Basic Linux commands.
