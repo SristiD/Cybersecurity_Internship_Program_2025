@@ -6,7 +6,7 @@
 To mark weekly attendance:
 1. Attend the session
 2. Complete at least ONE flag
-3. Upload a screenshot proof: (Attendance System/Week-1/sristi_Flag1_Enter-Day1.png)
+3. Upload a screenshot proof: ![Attendance System] (Attendance System/Week-1/sristi_Flag1_Enter-Day1.png)
 
 ## Flags:
 - Flag 1: Enter Flag ✅
