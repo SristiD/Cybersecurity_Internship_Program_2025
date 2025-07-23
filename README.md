@@ -105,7 +105,7 @@ This internship is designed to provide **hands-on experience** across critical d
 
 ## 📄 License
 
-This project is licensed under the [MIT License]().
+This project is licensed under the [MIT License](https://github.com/SristiD/Cybersecurity_Internship_Program_2025/blob/308a6e0af079d12084be2cd31359981f08fb5563/LICENSE).
 
 ---
 
