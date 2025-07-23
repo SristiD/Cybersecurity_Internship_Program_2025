@@ -1,10 +1,10 @@
 ---
 
-# Cybersecurity Internship Program 2025 – Digisuraksha Parhari Foundation
+# 🚨 Digi Suraksha Cybersecurity Internship Program 2025
 
-## 📌 Overview
 Welcome to the official repository for the **Digi Suraksha Cybersecurity Internship Program - 2025**.
 
+## 📌 Overview
 This internship is designed to provide **hands-on experience** across critical domains in cybersecurity, including:
 
 * Threat Intelligence
