@@ -4,10 +4,11 @@
 
 ## Intern: Sristi Dutta
 
-To mark weekly attendance:-
+To mark weekly attendance:
 1. Attend the session
 2. Complete at least ONE flag
-3. Upload a screenshot proof- ![Attendance System](Week-1/sristi_Flag1_Enter.png)
+3. Upload a screenshot proof:
+![Attendance System](Week-1/sristi_Flag1_Enter.png)
 
 ---
 
