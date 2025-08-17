@@ -15,7 +15,7 @@ To mark weekly attendance -
 ## Flags:
 - Flag 1: Enter Flag ✅
 - Flag 2: Blur Mode On ✅
-- Flag 3: LinkedIn Post 
+- Flag 3: LinkedIn Post ✅
 - Flag 4: Social Media Story/Post
 
 ---
