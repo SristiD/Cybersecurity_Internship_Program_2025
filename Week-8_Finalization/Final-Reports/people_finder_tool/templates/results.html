@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Results for {{ query }}</title>
+    <link rel="stylesheet" href="/static/css/style.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Search Results</h1>
+            <p class="tagline">OSINT Research Results for "{{ query }}"</p>
+        </header>
+        
+        <a href="/" class="back-link">← New Search</a>
+        
+        <!-- Search Parameters -->
+        <div class="search-params">
+            <h3>Search Parameters:</h3>
+            <div class="params-grid">
+                <div><strong>Name:</strong> {{ results.form_data.name }}</div>
+                <div><strong>Age:</strong> {{ results.form_data.age if results.form_data.age else 'N/A' }}</div>
+                <div><strong>Gender:</strong> {{ results.form_data.gender if results.form_data.gender else 'N/A' }}</div>
+                <div><strong>Location:</strong> {{ results.form_data.location if results.form_data.location else 'N/A' }}</div>
+            </div>
+        </div>
+        
+        <div class="results-container">
+            <!-- GitHub Results -->
+            {% if results.github %}
+            <div class="result-card {% if results.github.found %}found{% else %}notfound{% endif %}">
+                <div class="card-header">
+                    <i class="fab fa-github"></i>
+                    <h3>GitHub</h3>
+                </div>
+                <div class="card-body">
+                    {% if results.github.found %}
+                        {% if results.github.avatar_url %}
+                        <img src="{{ results.github.avatar_url }}" alt="GitHub Avatar" class="profile-img">
+                        {% endif %}
+                        <div class="info-item">
+                            <i class="fas fa-user"></i>
+                            <span><strong>Name:</strong> {{ results.github.name or 'N/A' }}</span>
+                        </div>
+                        <div class="info-item">
+                            <i class="fas fa-at"></i>
+                            <span><strong>Username:</strong> <a href="{{ results.github.html_url }}" target="_blank">{{ results.github.login }}</a></span>
+                        </div>
+                        <div class="info-item">
+                            <i class="fas fa-info-circle"></i>
+                            <span><strong>Bio:</strong> {{ results.github.bio or 'N/A' }}</span>
+                        </div>
+                        <div class="stats">
+                            <div class="stat">
+                                <div class="number">{{ results.github.public_repos }}</div>
+                                <div class="label">Repositories</div>
+                            </div>
+                            <div class="stat">
+                                <div class="number">{{ results.github.followers }}</div>
+                                <div class="label">Followers</div>
+                            </div>
+                        </div>
+                        {% if results.github.blog %}
+                        <div class="info-item">
+                            <i class="fas fa-link"></i>
+                            <span><strong>Website:</strong> <a href="{{ results.github.blog }}" target="_blank">{{ results.github.blog }}</a></span>
+                        </div>
+                        {% endif %}
+                    {% else %}
+                        <p>No public GitHub profile found for "{{ query }}".</p>
+                        {% if results.github.error %}
+                        <p class="error-text"><small>Error: {{ results.github.error }}</small></p>
+                        {% endif %}
+                    {% endif %}
+                </div>
+            </div>
+            {% endif %}
+
+            <!-- Image Comparison Results -->
+            {% if results.face_comparison %}
+            <div class="result-card {% if results.face_comparison.faces_detected %}found{% else %}notfound{% endif %}">
+                <div class="card-header">
+                    <i class="fas fa-camera"></i>
+                    <h3>Facial Recognition Comparison</h3>
+                </div>
+                <div class="card-body">
+                    {% if results.face_comparison.faces_detected %}
+                        <div class="image-comparison">
+                            <div class="comparison-image">
+                                <h4>Uploaded Image</h4>
+                                <img src="data:image/jpeg;base64,{{ results.face_comparison.uploaded_image }}" alt="Uploaded Image">
+                            </div>
+                            <div class="comparison-image">
+                                <h4>GitHub Profile Image</h4>
+                                <img src="data:image/jpeg;base64,{{ results.face_comparison.profile_image }}" alt="GitHub Profile Image">
+                            </div>
+                        </div>
+                        <div class="similarity-score">
+                            <h4>Similarity Score: {{ results.face_comparison.similarity }}%</h4>
+                            <div class="score-bar">
+                                {% if results.face_comparison.similarity %}
+                                    <div class="score-fill" style="width: results face_comparisonsimilarity"></div>
+                                {% else %}
+                                    <div class="score-fill" style="width: 0%;"></div>
+                                {% endif %}
+                            </div>
+                            <p class="score-interpretation">
+                                {% if results.face_comparison.similarity > 70 %}
+                                    <i class="fas fa-check-circle"></i> High similarity - Likely the same person
+                                {% elif results.face_comparison.similarity > 40 %}
+                                    <i class="fas fa-question-circle"></i> Moderate similarity - Possibly the same person
+                                {% else %}
+                                    <i class="fas fa-times-circle"></i> Low similarity - Unlikely to be the same person
+                                {% endif %}
+                            </p>
+                        </div>
+                    {% else %}
+                        <p>Facial recognition comparison could not be completed.</p>
+                        {% if results.face_comparison.error %}
+                            <p class="error-text"><small>Error: {{ results.face_comparison.error }}</small></p>
+                        {% else %}
+                            <p>No faces were detected in one or both of the images.</p>
+                        {% endif %}
+                        {% if results.face_comparison.uploaded_image and results.face_comparison.profile_image %}
+                        <div class="image-comparison">
+                            <div class="comparison-image">
+                                <h4>Uploaded Image</h4>
+                                <img src="data:image/jpeg;base64,{{ results.face_comparison.uploaded_image }}" alt="Uploaded Image">
+                            </div>
+                            <div class="comparison-image">
+                                <h4>GitHub Profile Image</h4>
+                                <img src="data:image/jpeg;base64,{{ results.face_comparison.profile_image }}" alt="GitHub Profile Image">
+                            </div>
+                        </div>
+                        {% endif %}
+                    {% endif %}
+                </div>
+            </div>
+            {% endif %}
+
+            <!-- Facebook Search -->
+            <div class="result-card found">
+                <div class="card-header">
+                    <i class="fab fa-facebook"></i>
+                    <h3>Facebook Search</h3>
+                </div>
+                <div class="card-body">
+                    <p>Search for "{{ query }}" on Facebook:</p>
+                    <a href="{{ results.facebook_dork }}" target="_blank" class="platform-link">
+                        <i class="fab fa-facebook"></i> Search Facebook for "{{ query }}"
+                    </a>
+                    <div class="search-tips">
+                        <h4><i class="fas fa-lightbulb"></i> Facebook Search Tips:</h4>
+                        <ul>
+                            <li>Try name variations (e.g., "John Doe" vs "Johnathan Doe")</li>
+                            <li>Add location to narrow results (e.g., "John Doe New York")</li>
+                            <li>Use quotes for exact matches</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <!-- LinkedIn Search -->
+            <div class="result-card found">
+                <div class="card-header">
+                    <i class="fab fa-linkedin"></i>
+                    <h3>LinkedIn Search</h3>
+                </div>
+                <div class="card-body">
+                    <p>Search for "{{ query }}" on LinkedIn:</p>
+                    <a href="{{ results.linkedin_dork }}" target="_blank" class="platform-link">
+                        <i class="fab fa-linkedin"></i> Search LinkedIn for "{{ query }}"
+                    </a>
+                    <div class="search-tips">
+                        <h4><i class="fas fa-lightbulb"></i> LinkedIn Search Tips:</h4>
+                        <ul>
+                            <li>Try professional titles (e.g., "John Doe Engineer")</li>
+                            <li>Add company names if known</li>
+                            <li>Search for specific skills or industries</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Instagram Search -->
+            <div class="result-card found">
+                <div class="card-header">
+                    <i class="fab fa-instagram"></i>
+                    <h3>Instagram Search</h3>
+                </div>
+                <div class="card-body">
+                    <p>Search for "{{ query }}" on Instagram:</p>
+                    <a href="{{ results.instagram_dork }}" target="_blank" class="platform-link">
+                        <i class="fab fa-instagram"></i> Search Instagram for "{{ query }}"
+                    </a>
+                    <div class="search-tips">
+                        <h4><i class="fas fa-lightbulb"></i> Instagram Search Tips:</h4>
+                        <ul>
+                            <li>Try possible username variations</li>
+                            <li>Add interests or hobbies to narrow search</li>
+                            <li>Look for location tags if known</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Advanced Search Combinations -->
+            <div class="result-card found">
+                <div class="card-header">
+                    <i class="fas fa-search-plus"></i>
+                    <h3>Advanced Search Combinations</h3>
+                </div>
+                <div class="card-body">
+                    <p>Try these advanced search combinations:</p>
+                    <div class="advanced-searches">
+                        {% for key, search_query in results.advanced_searches.items() %}
+                        <a href="https://www.google.com/search?q={{ search_query|urlencode }}" target="_blank" class="advanced-link">
+                            {{ search_query }}
+                        </a>
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        <p>Created for educational purposes only | OSINT Research Tool</p>
+    </footer>
+</body>
+</html>

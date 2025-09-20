@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Educational People Finder Tool</title>
+    <link rel="stylesheet" href="/static/css/style.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Educational People Finder Tool</h1>
+            <p class="tagline">OSINT Research for Educational Purposes</p>
+        </header>
+        
+        <div class="disclaimer">
+            <h3><i class="fas fa-exclamation-triangle"></i> Important Disclaimer</h3>
+            <p>This tool is for <strong>educational purposes only</strong>. It demonstrates how publicly available information can be found using OSINT techniques. Never use this tool to invade privacy, harass individuals, or for any illegal activities.</p>
+        </div>
+        
+        <div class="search-container">
+            <form action="/search" method="POST">
+                <div class="form-grid">
+                    <div class="form-group">
+                        <label for="name">Full Name *</label>
+                        <input type="text" id="name" name="name" placeholder="Enter full name" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="age">Age</label>
+                        <input type="text" id="age" name="age" placeholder="Age or N/A">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="gender">Gender</label>
+                        <select id="gender" name="gender">
+                            <option value="">Select or type N/A</option>
+                            <option value="Male">Male</option>
+                            <option value="Female">Female</option>
+                            <option value="Other">Other</option>
+                            <option value="N/A">N/A</option>
+                        </select>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="location">Location</label>
+                        <input type="text" id="location" name="location" placeholder="City, State or N/A">
+                    </div>
+                </div>
+                
+                <div class="form-group">
+                    <label for="comparison_image">Comparison Image (Optional)</label>
+                    <input type="file" id="comparison_image" name="comparison_image" accept="image/*">
+                    <small>Upload a photo for facial recognition comparison with profile pictures</small>
+                </div>
+
+                <div class="form-note">
+                    <p><i class="fas fa-info-circle"></i> Note: For unknown information, you can enter "N/A", "NA", "Not Applicable", or leave blank.</p>
+                </div>
+                
+                <div class="search-box">
+                    <button type="submit" id="searchButton">
+                        <i class="fas fa-search"></i> Search
+                    </button>
+                </div>
+            </form>
+        </div>
+
+        {% if error %}
+            <div class="error-message">
+                <i class="fas fa-exclamation-circle"></i> {{ error }}
+            </div>
+        {% endif %}
+    </div>
+
+    <footer>
+        <p>Created for educational purposes only | OSINT Research Tool</p>
+    </footer>
+</body>
+</html>
