@@ -68,4 +68,4 @@ This project is designed to **educate, spread awareness, and promote ethical use
 
 ### 👨‍💻 Created By
 *Educational OSINT Research Project*
-*Sristi Dutta & Piyush Babele*
+~ *Sristi Dutta & Piyush Babele*
